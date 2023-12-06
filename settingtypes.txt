@@ -1,5 +1,3 @@
-# The time format that is used in chat messages.
 time_format (Time Format) enum 24_hour 12_hour,24_hour
 
-# The date format that is used in chat messages.
 date_format (Date Format) enum dd-mm-yyyy dd-mm-yyyy,mm-dd-yyyy
