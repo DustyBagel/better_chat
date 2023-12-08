@@ -1,3 +1,8 @@
-time_format (Time Format) enum 24_hour 12_hour,24_hour
+#The time format to use.
+better_chat.time_format (Time Format) enum 24_hour 12_hour,24_hour
 
-date_format (Date Format) enum dd-mm-yyyy dd-mm-yyyy,mm-dd-yyyy
+#The order of the day, month and year in the date.
+better_chat.date_order (Date Order) enum day_month_year day_month_year,month_day_year,year_month_day,year_day_month
+
+#The character used to separate the different numbers in the date.
+better_chat.date_separator (Date Separator Character) enum slash slash,dash,period,comma
