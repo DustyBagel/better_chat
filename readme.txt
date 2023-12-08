@@ -1,4 +1,4 @@
-Minetest Mod: better_chat
+Minetest Mod: chat_time_stamps
 
 This mod overrides the default chat format so that it also contains the date and time that the message was sent.
 
