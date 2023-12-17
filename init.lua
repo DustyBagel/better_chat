@@ -85,9 +85,12 @@ if daylight_saving_time then
 end
 
 --Modify chat messages
-minetest.register_on_chat_message(function(name, message)
-	local time = os.date(time_format, os.time() + timezone_offset * 60 * 60)
-	local date = os.date(date_format) 
-	minetest.chat_send_all("<"..name.."> "..message.." [Message sent at "..time.." on "..date.."]")
-	return true
+minetest.register_on_chat_message(function(name, message) 
+	minetest.after(0.1, function()
+		local time = os.date(time_format, os.time() + timezone_offset * 60 * 60)
+		local date = os.date(date_format)
+		local time_and_date = minetest.colorize('yellow', "[Message sent at "..time.." on "..date.."]")
+		minetest.chat_send_all(time_and_date)
+	end)
+	return false
 end)
