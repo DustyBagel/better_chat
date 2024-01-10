@@ -84,13 +84,38 @@ if daylight_saving_time then
     timezone_offset = timezone_offset + 1
 end
 
+local function get_time_and_date()
+	local time = os.date(time_format, os.time() + timezone_offset * 60 * 60)
+	local date = os.date(date_format)
+	local time_and_date = minetest.colorize('yellow', "[Message sent at "..time.." on "..date.."]")
+	return time_and_date
+end
+
 --Modify chat messages
 minetest.register_on_chat_message(function(name, message) 
-	minetest.after(0.1, function()
-		local time = os.date(time_format, os.time() + timezone_offset * 60 * 60)
-		local date = os.date(date_format)
-		local time_and_date = minetest.colorize('yellow', "[Message sent at "..time.." on "..date.."]")
+	minetest.after(0.001, function()
+		local time_and_date = get_time_and_date()
 		minetest.chat_send_all(time_and_date)
 	end)
 	return false
 end)
+
+local old_msg_command = minetest.registered_chatcommands["msg"].func
+
+minetest.registered_chatcommands["msg"].func = function(name, param)
+	--This is to get the player name that the DM is being sent to.
+	--If minetest ever allows player names with spaces then this will need to be updated.
+
+	local player_name = param:match("(%w+)")
+
+	--Send the date and time message to the person who is supposed to get the DM.
+
+	minetest.after(0.001, function()
+		local time_and_date = get_time_and_date()
+		minetest.chat_send_player(player_name, time_and_date)
+	end)
+
+
+    -- Call the origial /msg command to send the message.
+    return old_msg_command(name, param)
+end
