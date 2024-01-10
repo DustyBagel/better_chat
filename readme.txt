@@ -1,6 +1,6 @@
 Minetest Mod: chat_time_stamps
 
-This mod overrides the default chat format so that it also contains the date and time that the message was sent.
+This mod sends a message whenever someone sends a message in chat that contains the date and time that the message was sent on.
 
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
